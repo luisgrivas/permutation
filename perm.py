@@ -19,7 +19,15 @@ class Permutation:
     
     def eval(self, element):
         return self.mapping[element]
-    
+ 
+def lcm(*args):
+    if len(args) == 1:
+        return args[0] 
+    elif len(args) == 2:
+        return int(args[0]*args[1] / math.gcd(args[0],args[1]))
+    else:
+        return lcm(args[0], lcm(args[1], args[2]))
+
 def product(perm1, perm2):
     return Permutation([perm1.mapping[val] for val in perm2.mapping])
 
@@ -41,7 +49,13 @@ def orbit(perm, element):
     return set(res)
 
 def order(perm):
-    return [len(orbit(perm, val)) for val in range(perm.n_elements)]
+    tmp = [len(orbit(perm, val)) for val in range(perm.n_elements)]
+    index = 0
+    res = tmp[0]
+    while index < len(tmp) - 1:
+        res = lcm(res, tmp[index + 1])
+        index += 1
+    return res
 
 def power(perm, n):
     if n == 0:
