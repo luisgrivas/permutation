@@ -31,11 +31,8 @@ def lcm(*args):
 
 
 def equal(perm1, perm2):
-    if perm1.mapping == perm2.mapping:
-        return True
-    else:
-        return False
-
+    return perm1.mapping == perm2.mapping
+    
 
 def product(perm1, perm2):
     return Permutation([perm1.mapping[val] for val in perm2.mapping])
@@ -80,10 +77,7 @@ def cycle_decom(perm):
 
 
 def iscycle(perm):
-    if len(cycle_decomposition(perm)) > 1:
-        return True
-    else:
-        return False
+    return len(cycle_decomposition(perm)) > 1
 
 
 def order(perm):
